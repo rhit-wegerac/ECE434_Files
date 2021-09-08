@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-chmod +x hw01.py
 
 import numpy as np
 import os
