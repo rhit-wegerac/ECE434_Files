@@ -4,7 +4,8 @@ import numpy as np
 import os
 import keyboard as key
 import time
-
+import sys 
+from curtsies import Input
 def update(grid, gridWidth, gridHeight, xPos, yPos):
     w = gridWidth
     h = gridHeight
@@ -26,7 +27,6 @@ def update(grid, gridWidth, gridHeight, xPos, yPos):
 
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
-
 
 print("Please enter the size of the grid.")
 width = input("Width = ")
@@ -56,37 +56,41 @@ print("Now constructing the grid...")
 time.sleep(2)
 clear()
 update(grid,widthInt,heightInt,xPos,yPos)
+
 while(1):
-    if key.is_pressed('up'):
-        time.sleep(0.1)
-        yPos -= 1
-        if(yPos < 0):
-            yPos = 0
-        clear()
-        grid = update(grid, widthInt, heightInt, xPos, yPos)
-    if key.is_pressed('down'):
-        time.sleep(0.1)
-        yPos += 1
-        if(yPos == heightInt):
-            yPos = heightInt - 1
-        clear()
-        grid = update(grid, widthInt, heightInt, xPos, yPos)
-    if key.is_pressed('left'):
-        time.sleep(0.1)
-        xPos -= 1
-        if(xPos < 0):
-            xPos = 0
-        clear()
-        grid = update(grid, widthInt, heightInt, xPos, yPos)
-    if key.is_pressed('right'):
-        time.sleep(0.1)
-        xPos += 1
-        if(xPos == widthInt):
-            xPos = widthInt - 1
-        clear()
-        grid = update(grid, widthInt, heightInt, xPos, yPos)
-    if key.is_pressed('space'):
-        time.sleep(0.1)
-        clear()
-        grid[:] = "."
-        grid = update(grid, widthInt, heightInt, xPos, yPos)
+    with Input(keynames='curses')as input_generator:
+        for e in input_generator:
+            if str(e) == 'KEY_UP':
+                time.sleep(0.1)
+                yPos -= 1
+                if(yPos < 0):
+                    yPos = 0
+                clear()
+                grid = update(grid, widthInt, heightInt, xPos, yPos)
+            if str(e) == "KEY_DOWN":
+                time.sleep(0.1)
+                yPos += 1
+                if(yPos == heightInt):
+                    yPos = heightInt - 1
+                clear()
+                grid = update(grid, widthInt, heightInt, xPos, yPos)
+            if str(e) == "KEY_LEFT":
+                time.sleep(0.1)
+                xPos -= 1
+                if(xPos < 0):
+                    xPos = 0
+                clear()
+                grid = update(grid, widthInt, heightInt, xPos, yPos)
+            if str(e) == "KEY_RIGHT":
+                time.sleep(0.1)
+                xPos += 1
+                if(xPos == widthInt):
+                    xPos = widthInt - 1
+                clear()
+                grid = update(grid, widthInt, heightInt, xPos, yPos)
+            if str(e) == ' ':
+                time.sleep(0.1)
+                clear()
+                grid[:] = "."
+                grid = update(grid, widthInt, heightInt, xPos, yPos)
+            
