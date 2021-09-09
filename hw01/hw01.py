@@ -5,7 +5,7 @@
 # I Andrew Weger pledge that the code below is 100% of my doing, and has not been plagiarized.#
 ###############################################################################################
 
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import numpy as np
 import os
