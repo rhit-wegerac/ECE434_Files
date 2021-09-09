@@ -8,4 +8,4 @@ When running the program, make sure you are running Python version 3 or newer, t
 
 
 
- To run the program, run the install.sh script. Then, type ./hw01.py into the terminal and the program should run. 
+ To run the program, run the install.sh script. Then, type ./hw01.py or "python hw01.py" into the terminal and the program should run. 
