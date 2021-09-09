@@ -100,5 +100,5 @@ while(1):#game loop
                 time.sleep(0.1)#gives time for the player to lift off the key
                 clear()#clears the screen
                 grid[:] = "."#resets the grid to empty
-                grid = update(grid, widthInt, heightInt, xPos, yPos)#update the screen
+                grid = update(grid, widthInt, heightInt, xPos, yPos)# update the screen
             
