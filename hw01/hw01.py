@@ -30,11 +30,11 @@ def update(grid, gridWidth, gridHeight, xPos, yPos):
         for k in range(w - 1):#for loop for the individual columns
             print(str(g[k][j]) + " ", end = " ")#prints the 'x' and '.' in the grid
         print(str(g[w - 1][j])) # prints the last grid element so the next line doesn't continue to print on the same line
-        print(" ")
-        print(" ")
-        print("(Controls):    Up Arrow: Moves the pen up.    Down Arrow: Moves the pen down. ")
-        print("Left Arrow: Moves the pen to the left.    Right Arrow: Moves the pen to the right.")
-        print("                           Spacebar: Clears the board.")
+    print(" ")
+    print(" ")
+    print("(Controls):    Up Arrow: Moves the pen up.    Down Arrow: Moves the pen down. ")
+    print("Left Arrow: Moves the pen to the left.    Right Arrow: Moves the pen to the right.")
+    print("                           Spacebar: Clears the board.")
     return g #returns the grid back to the while loop so that it can be updated.
             
 def clear():#clears the screen
