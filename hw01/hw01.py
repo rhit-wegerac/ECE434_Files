@@ -6,7 +6,7 @@
 ###############################################################################################
 
 #!/usr/bin/env python3
-#chmod +x hw01.py
+
 import numpy as np
 import os
 import time
