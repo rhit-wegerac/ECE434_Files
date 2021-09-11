@@ -1,2 +1,2 @@
-pip install numpy
-pip install curtsies
+pip3 install numpy
+pip3 install curtsies
