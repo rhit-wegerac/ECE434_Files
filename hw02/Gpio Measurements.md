@@ -36,4 +36,11 @@ The shortest period I could manage was 41 ms.
 |Frequency| 4.67 kHz|
 |CPU %| 58.4% |
 
+**GPIOD**
+| |Python| | C | |
+| |toggle1| toggle2|toggle1|toggle2|
+|---|---|---|---|---|
+|Period| | | | |
+|Frequency| | | | |
+
 
