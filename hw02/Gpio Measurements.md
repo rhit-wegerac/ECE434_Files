@@ -31,7 +31,7 @@ The shortest period I could manage was 41 ms.
 
 **Toggling GPIO**
 | |Python | C |
-|---|---|
+|---|---|---|
 |Period| 214 us| 420 us|
 |Frequency| 4.67 kHz| 2.37 kHz|
 |CPU %| 58.4% | 44.4%|
