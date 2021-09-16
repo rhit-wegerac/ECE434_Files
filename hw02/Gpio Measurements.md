@@ -17,7 +17,10 @@
  |Frequency| 22.2 Hz|
  |How close to 100ms| Closer than before, it's now less than 100 ms |
  |htop| 22.6 % CPU|
-Period is not very stable
+ |Period is not very stable|
+ 
+ 
+ 
 After launching vi it seems that the period is much more stable
 Cleaning up togglegpio.sh the period is down to 41 ms
 When using sh, the period actually seems to be slower at 43ms.
