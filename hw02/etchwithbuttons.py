@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 ###############################################################################################
 # Author: Andrew Weger                                                                        #
-# Date last modified: 9/9/2021                                                                #
+# Date last modified: 9/16/2021                                                                #
 # Description: This is the Etch-a-sketch program from hw01 in ECE434                          #
 # I Andrew Weger pledge that the code below is 100% of my doing, and has not been plagiarized.#
 ###############################################################################################
@@ -12,6 +12,32 @@ import os
 import time
 import sys 
 from curtsies import Input
+import gpiod
+
+chip0 = gpiod.Chip('gpiochip0')
+chip1 = gpiod.Chip('gpiochip1')
+CONSUMER='getset'
+#defines which pins the LEDs use
+rled = chip1.get_lines([28])#LED1
+gled = chip1.get_lines([18])#LED2
+bled = chip1.get_lines([19])#LED3
+yled = chip0.get_lines([4])#LED4
+#sets the LEDs as outputs
+rled.request(consumer=CONSUMER, type = gpiod.LINE_REQ_DIR_OUT)
+gled.request(consumer=CONSUMER, type = gpiod.LINE_REQ_DIR_OUT)
+bled.request(consumer=CONSUMER, type = gpiod.LINE_REQ_DIR_OUT)
+yled.request(consumer=CONSUMER, type = gpiod.LINE_REQ_DIR_OUT)
+
+#defines which pins the switches are
+rbut = chip0.get_lines([30])#button1
+gbut = chip0.get_lines([31])#button2
+bbut = chip1.get_lines([16])#button3
+ybut = chip0.get_lines([5])#button
+#sets the switches as inputs
+rbut.request(consumer=CONSUMER, type = gpiod.LINE_REQ_DIR_IN)
+gbut.request(consumer=CONSUMER, type = gpiod.LINE_REQ_DIR_IN)
+bbut.request(consumer=CONSUMER, type = gpiod.LINE_REQ_DIR_IN)
+ybut.request(consumer=CONSUMER, type = gpiod.LINE_REQ_DIR_IN)
 
 def update(grid, gridWidth, gridHeight, xPos, yPos):
     #The following lines take the inputs to the funtion and assigns them to a different variable
@@ -32,13 +58,51 @@ def update(grid, gridWidth, gridHeight, xPos, yPos):
         print(str(g[w - 1][j])) # prints the last grid element so the next line doesn't continue to print on the same line
     print(" ")
     print(" ")
-    print("(Controls):    Up Arrow: Moves the pen up.    Down Arrow: Moves the pen down. ")
-    print("Left Arrow: Moves the pen to the left.    Right Arrow: Moves the pen to the right.")
-    print("                           Spacebar: Clears the board.")
+    print("(Controls):    Button1: Moves the pen up.    Button2: Moves the pen down. ")
+    print("Button3: Moves the pen to the left.    Button4: Moves the pen to the right.")
+    print("                      Buttons 1 & 2: Clears the board.")
     return g #returns the grid back to the while loop so that it can be updated.
             
 def clear():#clears the screen
     os.system('cls' if os.name == 'nt' else 'clear')
+    
+def buttonReset(grid):
+    grid2 = grid
+    #flashes all 4 lights 3 times
+    rled.set_values([1])
+    gled.set_values([1])
+    bled.set_values([1])
+    yled.set_values([1])
+    time.sleep(0.25)
+    rled.set_values([0])
+    gled.set_values([0])
+    bled.set_values([0])
+    yled.set_values([0])
+    time.sleep(0.25)
+    rled.set_values([1])
+    gled.set_values([1])
+    bled.set_values([1])
+    yled.set_values([1])
+    time.sleep(0.25)
+    rled.set_values([0])
+    gled.set_values([0])
+    bled.set_values([0])
+    yled.set_values([0])
+    time.sleep(0.25)
+    rled.set_values([1])
+    gled.set_values([1])
+    bled.set_values([1])
+    yled.set_values([1])
+    time.sleep(0.25)
+    rled.set_values([0])
+    gled.set_values([0])
+    bled.set_values([0])
+    yled.set_values([0])
+    clear()#clears the screen
+    grid2[:] = "."#resets the grid to empty
+    grid2 = update(grid2, widthInt, heightInt, xPos, yPos)# update the screen
+    return grid2
+    
 
 print("Please enter the size of the grid. (Press Enter after entering the size)")
 width = input("Width = ")#prompts for the grid width
@@ -66,38 +130,55 @@ clear()#clears the screen
 update(grid,widthInt,heightInt,xPos,yPos)#updates the screeen with the starting board
 
 while(1):#game loop
-    with Input(keynames='curses')as input_generator:#detects if there was a key pressed 
-        for e in input_generator:
-            if str(e) == 'KEY_UP': #checks if the up arrow was pressed
-                time.sleep(0.1)#sleeps to give time for the player to lift off the key
-                yPos -= 1 #moves the position of the pen in the y direction
-                if(yPos < 0): #if the pen goes outside of the boundary, keep it at 0
-                    yPos = 0
-                clear()#clears the screen
-                grid = update(grid, widthInt, heightInt, xPos, yPos)#updates the screen with the new grid
-            if str(e) == "KEY_DOWN":#checks if the down arrow was pressed
-                time.sleep(0.1)#sleeps to give time for the player to lift off the key
-                yPos += 1#moves the position of the pen in the y direction
-                if(yPos == heightInt):#if the pen goes outside the boundary, keep it at the edge fo the grid
-                    yPos = heightInt - 1
-                clear()#clear the screen
-                grid = update(grid, widthInt, heightInt, xPos, yPos)#update the screen
-            if str(e) == "KEY_LEFT":#checks if the left arrow was pressed
-                time.sleep(0.1)#sleeps to give time for the player to lift off the key
-                xPos -= 1#moves the pen in the x direction
-                if(xPos < 0):#if the pen goes ouside the boundary, keep it at 0
-                    xPos = 0
-                clear()#clear the screen
-                grid = update(grid, widthInt, heightInt, xPos, yPos)#update the screen
-            if str(e) == "KEY_RIGHT":#checks if the right arrow was pressed
-                time.sleep(0.1)# sleeps to give time for the player to lift off the key
-                xPos += 1 #moves the pen in the x direction
-                if(xPos == widthInt):#if the pen is outside the boundary, keep it at the edge of the grid
-                    xPos = widthInt - 1
-                clear()#clear the screen
-                grid = update(grid, widthInt, heightInt, xPos, yPos)#update the screen
-            if str(e) == ' ':#check if the spacebar was pressed
-                time.sleep(0.1)#gives time for the player to lift off the key
-                clear()#clears the screen
-                grid[:] = "."#resets the grid to empty
-                grid = update(grid, widthInt, heightInt, xPos, yPos)# update the screen
+    #gets the values of the switches
+    rval = rbut.get_values()#button1
+    gval = gbut.get_values()#button2
+    bval = bbut.get_values()#button3
+    yval = ybut.get_values()#button4
+    
+    if rval == [0]:#if button1 is pressed, do this
+        time.sleep(0.25)
+        if gval == [0]: #if button2 is also pressed, do this
+            grid = buttonReset(grid)
+        else:
+            rled.set_values([1])#turn on LED1
+            time.sleep(0.1)#sleeps to give time for the player to lift off the key
+            rled.set_values([0])
+            yPos -= 1 #moves the position of the pen in the y direction
+            if(yPos < 0): #if the pen goes outside of the boundary, keep it at 0
+                yPos = 0
+            clear()#clears the screen
+            grid = update(grid, widthInt, heightInt, xPos, yPos)#updates the screen with the new grid
+    if gval == [0]:#if button2 is pressed, do this
+        time.sleep(0.25)
+        if rval == [0]:#if button1 is also pressed, do this
+            grid = buttonReset(grid)
+        else:
+            gled.set_values([1])#turn on LED2
+            time.sleep(0.1)#sleeps to give time for the player to lift off the key
+            gled.set_values([0])#turn off LED2
+            yPos += 1#moves the position of the pen in the y direction
+            if(yPos == heightInt):#if the pen goes outside the boundary, keep it at the edge fo the grid
+                yPos = heightInt - 1
+            clear()#clear the screen
+            grid = update(grid, widthInt, heightInt, xPos, yPos)#update the screen
+    if bval == [0]:#if button3 is pressed, do this
+        bled.set_values([1])#turn on LED3
+        time.sleep(0.35)#sleeps to give time for the player to lift off the key
+        bled.set_values([0])#turn off LED3
+        xPos -= 1#moves the pen in the x direction
+        if(xPos < 0):#if the pen goes ouside the boundary, keep it at 0
+            xPos = 0
+        clear()#clear the screen
+        grid = update(grid, widthInt, heightInt, xPos, yPos)#update the screen
+    if yval == [0]:#if button4 is pressed, do this
+        yled.set_values([1])#turn on LED4
+        time.sleep(0.35)# sleeps to give time for the player to lift off the key
+        yled.set_values([0])#turn off LED 4
+        xPos += 1 #moves the pen in the x direction
+        if(xPos == widthInt):#if the pen is outside the boundary, keep it at the edge of the grid
+            xPos = widthInt - 1
+        clear()#clear the screen
+        grid = update(grid, widthInt, heightInt, xPos, yPos)#update the screen
+    
+        
