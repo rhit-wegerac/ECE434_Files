@@ -21,7 +21,7 @@
  
  
  
-After launching vi it seems that the period is much more stable
-Cleaning up togglegpio.sh the period is down to 41 ms
+After launching vi it seems that the period is much more stable.
+Cleaning up togglegpio.sh the period is down to 41 ms.
 When using sh, the period actually seems to be slower at 43ms.
 The shortest period I could manage was 41 ms.
