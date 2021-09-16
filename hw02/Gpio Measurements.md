@@ -38,6 +38,7 @@ The shortest period I could manage was 41 ms.
 
 **GPIOD**
 | |Python| | C | |
+|---|---|---|---|---|
 | |toggle1| toggle2|toggle1|toggle2|
 |---|---|---|---|---|
 |Period| | | | |
