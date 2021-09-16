@@ -35,6 +35,7 @@ The shortest period I could manage was 41 ms.
 |Period| 214 us| 420 us|
 |Frequency| 4.67 kHz| 2.37 kHz|
 |CPU %| 58.4% | 44.4%|
+
 This surprised me that I couldn't get the C code to run faster than python.
 
 **GPIOD**
