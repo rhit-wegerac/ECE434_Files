@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
 
+###############################################################################################
+# Author: Andrew Weger                                                                        #
+# Date last modified: 9/24/2021                                                               #
+# Description: This is a program that uses two TMP101, sets T_high and T_low on both and      #
+#               prints the temperature if the temperature goes above T_high                   #
+# I Andrew Weger pledge that the code below is 100% of my doing, and has not been plagiarized.#
+###############################################################################################
+
 import os
 import time
 import smbus
 import gpiod
-
-# while True:
-#     time.sleep(0.5)
-#     temp1 = os.popen('sudo i2cget -y 2 0x4a 00').read()
-#     temp2 = os.popen('sudo i2cget -y 2 0x48 00').read()
-#     temp1int = (int(temp1,base=16) * 1.8) + 32
-#     temp2int = (int(temp2,base=16) * 1.8) + 32
-#     print("Temp 1: " + str(round(temp1int,2)) + "\N{DEGREE SIGN}" + "F")
-#     print("Temp 2: " + str(round(temp2int,2)) + "\N{DEGREE SIGN}" + "F")
-#     print("*********************")
 
 bus = smbus.SMBus(2)
 address1 = 0x4a
@@ -37,10 +35,7 @@ test = bus.read_byte_data(address1,1)
 test1 = bus.read_byte_data(address1,2)
 test2 = bus.read_byte_data(address1,3)
 while True:
-    # temp1 = bus.read_byte_data(address1,0)
-    # temp2 = bus.read_byte_data(address2,0)
-    # print(str(temp1) + " " + str(temp2), end="\r")
-    # time.sleep(0.25)
+    
     temp1 = sens1.get_values()
     temp2 = sens2.get_values()
     if temp1 == [0]:
