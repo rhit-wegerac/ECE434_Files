@@ -13,22 +13,7 @@ app = Flask(__name__)
 
 
 
-upEnc = RotaryEncoder(eQEP2)
-upEnc.setAbsolute()
-upEnc.enable()
 
-sideEnc = RotaryEncoder(eQEP1)
-sideEnc.setAbsolute()
-sideEnc.enable()
-
-chip1 = gpiod.Chip('gpiochip1')
-CONSUMER='getset'
-rotBut = chip1.get_lines([16])
-rotBut.request(consumer=CONSUMER, type = gpiod.LINE_REQ_DIR_IN)
-
-
-upEncPos = upEnc.position
-sideEncPos = sideEnc.position
 
 
 
@@ -114,7 +99,9 @@ if __name__ == '__main__':
     xPos = 0;
     yPos = 0; 
     yPosB = 1;
-    
+    bus.write_byte_data(matrix, 0x21, 0)   # Start oscillator (p10)
+    bus.write_byte_data(matrix, 0x81, 0)   # Disp on, blink off (p11)
+    bus.write_byte_data(matrix, 0xe7, 0)   # Full brightness (page 15)
     bus.write_i2c_block_data(matrix,0, matrixGrid)
     
     bus.write_byte_data(matrix, 0xFF, 0)
