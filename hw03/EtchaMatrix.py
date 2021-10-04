@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
 
-###############################################################################################
-# Author: Andrew Weger                                                                        #
-# Date last modified: 9/24/2021                                                               #
-# Description: This is a etch-a-sketch program that is displayed on a 8x8 matrix and          #
-#               and controlled by two rotary encoders                                         #
-# I Andrew Weger pledge that the code below is 100% of my doing, and has not been plagiarized.#
-###############################################################################################
-
-
 import os
 import time
 import smbus
@@ -59,7 +50,7 @@ while(1):#game loop
 
     
     press = rotBut.get_values()
-    print(press)
+    
    
    
     if upEnc.position > upEncPos : #checks if the up arrow was pressed
