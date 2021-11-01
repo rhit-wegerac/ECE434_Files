@@ -16,3 +16,5 @@
 10. The non-critical IRQ
 11. The RT patch had been enabled
 
+**PREEMPT_RT**
+I could not complete this part of the homework, I ended up bricking my Beagle twice which caused me to start over and setup the Beagle from scratch with a fresh SD card installation.
