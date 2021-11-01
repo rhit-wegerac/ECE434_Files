@@ -1,0 +1,10 @@
+[Unit]
+Description=Flask Etch a Sketch Service
+
+[Service]
+ExecStart=/root/flasketch.py
+StandardOutput=null
+
+[Install]
+WantedBy=multi-user.target
+Alias=flasketch.service
