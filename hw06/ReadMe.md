@@ -21,3 +21,18 @@ My project page on eLinux is at the address: https://elinux.org/ECE434_Project-_
 
 **PREEMPT_RT**
 I could not complete this part of the homework, I ended up bricking my Beagle twice which caused me to start over and setup the Beagle from scratch with a fresh SD card installation.
+
+# hw06 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+|  2/2 | Project 
+|  5/5 | Questions
+|  0/4 | PREEMPT_RT
+|  0/2 | Plots to 500 us
+|  0/5 | Plots - Heavy/Light load
+|  0/2 | Extras
+| 7/20 | **Total**
+
+*My comments are in italics. --may*
+
