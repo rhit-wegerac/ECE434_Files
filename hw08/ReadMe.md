@@ -8,3 +8,6 @@ Still Working on hw08
 
 - Starting the PRU code `sudo make TARGET=hello.pru0`
 - Stopping PRU code ``sudo make TARGET=hello.pru0 stop` 
+- Pin P9_31 is toggling at 12.5MHz
+- There is a bit of jitter.
+- The pin seems to be stable, the voltage seems to be the same at every toggle.
