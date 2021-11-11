@@ -1,6 +1,6 @@
 **ReadMe for hw08**
 
-Still Working on hw08
+
 
 <u>Questions</u>
 
@@ -24,3 +24,16 @@ Still Working on hw08
 
 **<u>5.4 Controlling the PWM Frequency</u>**
 
+- The four pins are: P9_28, P9_29, P9_30, P9_31
+- The highest frequency I could get was around 760kHz and with that, the scope output was not very clear and bounced from 595kHz to 760kHz.
+- The `pwm-test.c` file seemed to work and change the on and off times.
+
+**<u>5.9 Reading an Input at Regular Intervals (optional)</u>**
+
+
+
+![](https://github.com/rhit-wegerac/ECE434_Files/blob/main/hw08/IMG_5367.jpeg?raw=true)
+
+*Figure 2: Scope image for section 5.9*
+
+- When I ran this code, the bone has approximately a 34ns delay from when an input is detected to when it is sent as an output.
