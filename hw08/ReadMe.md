@@ -11,3 +11,11 @@ Still Working on hw08
 - Pin P9_31 is toggling at 12.5MHz
 - There is a bit of jitter.
 - The pin seems to be stable, the voltage seems to be the same at every toggle.
+
+**<u>5.3 PWM Generator</u>**
+
+![scope1](C:\Users\wegerac\Desktop\ECE434\scope1.jpg)
+
+*Figure 1: Scope Output for `pwm1.pru0.c`*
+
+- 
