@@ -19,7 +19,7 @@
 *Figure 1: Scope Output for `pwm1.pru0.c`*
 
 - The wave seems to be fairly stable, even though the waveform looks more like a sine wave than a square wave.
-- The standard deviation is 2.627V
+- The standard deviation is 2.627V *The units should be seconds.*
 - When I ran the code at a slower speed, there was jitter, but since this is running at 50MHz, there is not really enough time for jitter, and we don't see any.
 
 **<u>5.4 Controlling the PWM Frequency</u>**
@@ -37,3 +37,17 @@
 *Figure 2: Scope image for section 5.9*
 
 - When I ran this code, the bone has approximately a 34ns delay from when an input is detected to when it is sent as an output.
+- 
+
+
+# hw08 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+| 14/14 | PRU
+|  2/2 | Controlling the PWM Frequency - optional
+|  2/2 | Reading an Input at Regular Intervals - optional
+|  0/2 | Analog Wave Generator - optional
+| 18/20 | **Total**
+
+*My comments are in italics. --may*
